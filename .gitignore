@@ -1,0 +1,32 @@
+#ignore generated binary files and auto-generated ANTLR code
+bin
+src/antlr
+
+#ignore Java class files
+*.class
+
+#ignore other junk files
+*~
+target/
+gen/
+
+# MacOs
+.DS_Store
+
+# IDEs
+.idea/
+.vscode/
+
+# ANTLR
+*.antlr/
+*/gen
+
+# test input
+test.wacc
+
+# test output
+*.s
+
+# others
+*.iml
+*.tokens

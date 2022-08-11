@@ -1,0 +1,36 @@
+default:
+  tags:
+    - WACC
+
+build-job:
+  stage: build
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "master"'
+    - when: manual
+  artifacts:
+    untracked: true
+  script:
+    - make clean
+    - make
+
+syntactic-test-job:
+  stage: test
+  dependencies:
+    - build-job
+  script:
+    - mvn surefire:test -Dtest=SyntacticIntegrationTest*
+
+semantic-test-job:
+  stage: test
+  dependencies:
+    - build-job
+  script:
+    - mvn surefire:test -Dtest=SemanticIntegrationTest*
+
+emulation-test-job:
+  stage: test
+  dependencies:
+    - build-job
+  script:
+    - mvn surefire:test -Dtest=EmulationCITests*
+
